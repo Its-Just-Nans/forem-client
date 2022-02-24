@@ -16,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/Its-Just-Nans/forem-client/issues"
   },
-  "homepage": "https://github.com/Its-Just-Nans/forem-client#readme"
+  "homepage": "https://github.com/Its-Just-Nans/forem-client#readme",
+  "keywords": [
+    "api",
+    "forem",
+    "forem-client",
+    "forem-api",
+    "dev.to",
+    "API-client"
+  ]
 }
