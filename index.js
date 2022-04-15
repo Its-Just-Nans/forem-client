@@ -1,5 +1,4 @@
 export default class ForemClient {
-
     constructor(requester, endpoint) {
         this.requester = requester;
         this.API_ENDPOINT = endpoint || "https://dev.to/api"; // default
@@ -9,17 +8,17 @@ export default class ForemClient {
 
     setAPIkey = (newAPIkey) => {
         this.API_KEY = newAPIkey;
-    }
+    };
     setUser = (newUser, override = true) => {
         if (override) {
             this.user = newUser;
         } else {
             this.user = { ...this.user, newUser };
         }
-    }
+    };
     getUser = () => {
         return this.user;
-    }
+    };
 
     /**
         @params options = {
@@ -36,39 +35,39 @@ export default class ForemClient {
     */
     GET_articles = async (options = null) => {
         const urlParams = new URLSearchParams(options).toString();
-        return await this.request('get', `/articles?${urlParams}`);
-    }
+        return await this.request("get", `/articles?${urlParams}`);
+    };
 
     /**
         getUserByUsername
         @params username
     */
     GET_getUserByUsername = async (username = "") => {
-        return await this.request('get', `/users/by_username?url=${username}`);
-    }
+        return await this.request("get", `/users/by_username?url=${username}`);
+    };
 
     /**
         getUserById
         @params id
     */
     GET_getUserById = async (id = 0) => {
-        return await this.request('get', `/users/${id}`);
-    }
+        return await this.request("get", `/users/${id}`);
+    };
 
     /**
         Post an article
     */
     POST_articles = async (data = null) => {
-        return await this.request('post', '/articles', data);
-    }
+        return await this.request("post", "/articles", data);
+    };
 
     /**
         Update an article
     */
     PUT_articles = async (data = null) => {
         const urlParams = new URLSearchParams(options).toString();
-        return await this.request('put', '/articles', data);
-    }
+        return await this.request("put", "/articles", data);
+    };
 
     /**
         Update an article
@@ -79,20 +78,23 @@ export default class ForemClient {
     */
     GET_articlesMe = async (options) => {
         const urlParams = new URLSearchParams(options).toString();
-        return await this.request('get', `/articles/me?${urlParams}`);
-    }
+        return await this.request("get", `/articles/me?${urlParams}`);
+    };
 
-    async request(method = 'get', url = "", dataToSend = null) {
+    async request(method = "get", url = "", dataToSend = null) {
         const obj = {
-            method: method
+            method: method,
         };
         if (this.API_KEY) {
-            obj.headers = { "api-key": this.API_KEY }
+            obj.headers = { "api-key": this.API_KEY };
         }
         if (dataToSend !== null) {
             obj.data = dataToSend;
         }
-        const { data } = await this.requester(`${this.API_ENDPOINT}${url}`, obj).catch(function (error) {
+        const { data } = await this.requester(
+            `${this.API_ENDPOINT}${url}`,
+            obj
+        ).catch(function (error) {
             throw error;
         });
         return data;
